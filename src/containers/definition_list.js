@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import OxfordCard from './oxford_card';
+import WebsterCard from './webster_card';
 
 class DefinitionList extends React.Component {
   
@@ -11,7 +12,7 @@ class DefinitionList extends React.Component {
       
       <div className="row">
         <OxfordCard/>
-        
+        <WebsterCard/>
       </div>
     )
   }

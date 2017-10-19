@@ -1,14 +1,16 @@
 import React from 'react';
 
 export default (props) => {
-  const definitions = props.definitions.results[0].lexicalEntries[0].entries[0].senses;
+
 
   return (
-    <div className="col-sm-4">
-      <h2 className="text-center">{props.provider}</h2>
+    <div className="col-sm-6">
+      <h2 className="text-xs-center">{props.provider}</h2>
+      <h5 className="text-xs-center">Word: {props.word}</h5>
+      <h5 className="text-xs-center">Type: {props.type}</h5>
       <ul>
-        {definitions.map(def => {
-          return <li key={def.id}>{def.definitions[0]}</li>
+        {props.definitions.map(def => {
+          return <li >{def}</li>
         })}
       </ul>
     </div>

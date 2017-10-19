@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchOxford } from '../actions/index';
+import { fetchOxford, fetchWebster } from '../actions/index';
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -23,6 +23,7 @@ class SearchBar extends React.Component {
     event.preventDefault();
 
     this.props.fetchOxford(this.state.searchTerm);
+    this.props.fetchWebster(this.state.searchTerm);
     this.setState({ searchTerm: '' });
   }
 
@@ -44,7 +45,7 @@ class SearchBar extends React.Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({fetchOxford}, dispatch)
+  return bindActionCreators({fetchOxford, fetchWebster}, dispatch)
 }
 
 export default connect(null, mapDispatchToProps)(SearchBar);

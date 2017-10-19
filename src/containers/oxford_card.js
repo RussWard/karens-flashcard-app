@@ -7,10 +7,19 @@ class OxfordCard extends React.Component {
     if (!this.props.oxford.oxfordDef) {
       return <div></div>
     }
+    
+    let defArray = this.props.oxford.oxfordDef.results[0].lexicalEntries[0].entries[0].senses.map(sense => {
+      return sense.definitions[0];
+    });
+    let word = this.props.oxford.oxfordDef.results[0].word;
+    let type = this.props.oxford.oxfordDef.results[0].lexicalEntries[0].lexicalCategory
+
     return (
       <Card 
         provider={'Oxford'}
-        definitions={this.props.oxford.oxfordDef}
+        word={word}
+        type={type}
+        definitions={defArray}
       />
     )
   }
