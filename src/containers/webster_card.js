@@ -1,30 +1,50 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Card from '../components/Card';
+import ErrorBoundary from '../components/ErrorBoundary';
+import { loadFlashcard } from '../actions';
 
 class WebsterCard extends React.Component {
+
+  newFlashcard(def) {
+    let card = {
+      word: def.word,
+      type: this.props.webster.type,
+      definition: def.definition
+    }
+    this.props.loadFlashcard(card)
+  }
+  
   render() {
-    if (!this.props.webster.websterDef) {
+    if (!this.props.webster.defs) {
       return <div></div>
     }
     
-    let word = this.props.webster.websterDef[0].word;
-    let type = this.props.webster.websterDef[0].functional_label;
-    let defs = this.props.webster.websterDef[0].definition[0].senses || this.props.webster.websterDef[0].definition;
-    let defArray = defs.map(def => { 
-      if (!def.senses) {
-        return def.meanings[0]
-      } 
-      return def.senses[0].meanings[0];
-    })
-    
     return (
-      <Card
-        provider={'Webster'}
-        word={word}
-        type={type}
-        definitions={defArray}
-      />
+      <ErrorBoundary>
+        <div className="col-sm-6">
+          <h2 className="text-xs-center">{'Webster'}</h2>
+          <h5 className="text-xs-center">Word: {this.props.webster.word}</h5>
+          <h5 className="text-xs-center">Part of Speech: {this.props.webster.type}</h5>
+          <ol>
+            {this.props.webster.defs.map(def => {
+              if (def && def.definition.trim() !== '') {
+                return <li 
+                        key={def.id}
+                        onClick={() => {
+                          this.newFlashcard.apply(this, [def])
+                        }}>
+                          <Card 
+                            def={def}
+                            word={this.props.webster.word}
+                            type={this.props.webster.type} 
+                            />
+                       </li>
+              }
+            })}
+          </ol>  
+        </div>
+      </ErrorBoundary>
     )
   }
 }
@@ -35,4 +55,4 @@ function mapStateToProps({ webster }) {
   }
 };
 
-export default connect(mapStateToProps)(WebsterCard);
+export default connect(mapStateToProps, { loadFlashcard })(WebsterCard);

@@ -1,26 +1,49 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Card from '../components/Card';
+import ErrorBoundary from '../components/ErrorBoundary';
+import { loadFlashcard } from '../actions';
 
 class OxfordCard extends React.Component {
+
+  newFlashcard(def) {
+    let card = {
+      word: def.word,
+      type: this.props.oxford.type,
+      definition: def.definition
+    }
+    this.props.loadFlashcard(card)
+  }
+
   render() {
-    if (!this.props.oxford.oxfordDef) {
+    if (!this.props.oxford.defs) {
       return <div></div>
     }
     
-    let defArray = this.props.oxford.oxfordDef.results[0].lexicalEntries[0].entries[0].senses.map(sense => {
-      return sense.definitions[0];
-    });
-    let word = this.props.oxford.oxfordDef.results[0].word;
-    let type = this.props.oxford.oxfordDef.results[0].lexicalEntries[0].lexicalCategory
-
     return (
-      <Card 
-        provider={'Oxford'}
-        word={word}
-        type={type}
-        definitions={defArray}
-      />
+      <ErrorBoundary>
+        <div className="col-sm-6">
+          <h2 className="text-xs-center">{'Oxford'}</h2>
+          <h5 className="text-xs-center">Word: {this.props.oxford.word}</h5>
+          <h5 className="text-xs-center">Part of Speech: {this.props.oxford.type}</h5>
+          <ol>
+            {this.props.oxford.defs.map(def => {
+              if (def && def.definition.trim() !== '') {
+                return <li 
+                        key={def.id}
+                        onClick={() => {
+                          this.newFlashcard.apply(this, [def])
+                        }}>
+                          <Card 
+                            def={def}
+                            type={this.props.oxford.type} 
+                            />
+                       </li>
+              }
+            })}
+          </ol>  
+        </div>
+      </ErrorBoundary>
     )
   }
 }
@@ -31,4 +54,4 @@ function mapStateToProps({ oxford }) {
   };
 }
 
-export default connect(mapStateToProps)(OxfordCard);
+export default connect(mapStateToProps, { loadFlashcard })(OxfordCard);

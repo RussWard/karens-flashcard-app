@@ -10,7 +10,7 @@ class DefinitionList extends React.Component {
     
     return (
       
-      <div className="row">
+      <div className="row">       
         <OxfordCard/>
         <WebsterCard/>
       </div>
