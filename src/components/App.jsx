@@ -9,12 +9,12 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>   
+      <div> 
+        <div className="text-xs-right">
+          <Link to='/practice'>Practice With Your Saved Flashcards</Link>
+        </div>  
         <SearchBar />   
         <DefinitionList />
-        <div className="text-xs-right">
-          <Link to='/practice'>WERK!</Link>
-        </div>
       </div>
     );
   }

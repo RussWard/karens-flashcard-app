@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { getFlashcards } from '../actions';
+import Flashcard from '../components/Flashcard';
 
 class PracticeVocab extends React.Component {
   componentDidMount() {
@@ -18,8 +20,18 @@ class PracticeVocab extends React.Component {
     }
     return (
       <div>
-        {console.log('FLASHCARDS ====>', this.props.flashcards)}
-        practice vocab
+        <Link to="/">Back to Index</Link>
+        <div>
+          {this.props.flashcards.map(word => {
+            return <div key={word.id}>
+                    <Flashcard
+                      key={word.id}
+                      word={word.word}
+                      def={word.def}
+                      type={word.type}
+                    />
+                   </div>})}
+        </div>
       </div>
     )
   }

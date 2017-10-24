@@ -25,7 +25,6 @@ class OxfordCard extends React.Component {
         <div className="col-sm-6">
           <h2 className="text-xs-center">{'Oxford'}</h2>
           <h5 className="text-xs-center">Word: {this.props.oxford.word}</h5>
-          <h5 className="text-xs-center">Part of Speech: {this.props.oxford.type}</h5>
           <ol>
             {this.props.oxford.defs.map(def => {
               if (def && def.definition.trim() !== '') {
