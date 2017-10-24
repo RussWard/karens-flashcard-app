@@ -8,6 +8,7 @@
 }
 
 .flashcard {
+  float: left;
   height: 225px;
   width: 375px;
   background-color: #eee;
@@ -15,5 +16,9 @@
   border-radius: 5px;
   text-align: center;
   padding-top: 50px
+}
+
+.button-box button{
+  float: left;
 }
 
