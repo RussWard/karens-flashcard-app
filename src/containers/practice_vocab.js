@@ -24,9 +24,8 @@ class PracticeVocab extends React.Component {
         <div className="row">
           <div className="col-xs-12">
             {this.props.flashcards.map(word => {
-              return <div key={word.id}>
+              return <div key={word._id + 'flashcardKey'}>
                       <Flashcard
-                        key={word.id}
                         word={word.word}
                         def={word.def}
                         type={word.type}
