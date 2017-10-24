@@ -12,12 +12,15 @@ module.exports = (req, res) => {
       console.log('Error in middleware ', err);
       res.send(404, err);
     } else {
-      data.defArray = data.results[0].lexicalEntries[0].entries[0].senses.map(sense=> {
-        return {
-          word: req.query.word,
-          definition: sense.definitions[0],
-          id: sense.id,
-        };
+      let defs = data.results[0].lexicalEntries[0].entries[0].senses || [];
+      data.defArray = defs.map(sense=> {
+        if (sense) {
+          return {
+            word: req.query.word,
+            definition: sense.definitions[0],
+            id: sense.id,
+          };
+        }
       });
       data.type = data.results[0].lexicalEntries[0].lexicalCategory;
       data.word = req.query.word;
