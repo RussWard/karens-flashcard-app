@@ -42,7 +42,7 @@ module.exports.deleteFlashcard = (id, cb) => {
     if (err) {
       console.log('Error connecting to db ', err);
     } else {
-      db.collection('flashcards').deleteOne({word: id}, (err, result) => {
+      db.collection('flashcards').deleteOne({cardId: id}, (err, result) => {
         if (err) {
           console.log('ERROR DELETING DOCUMENT =====> ', err);
           cb(err, null);

@@ -17,7 +17,7 @@ class Flashcard extends React.Component {
   }
 
   handleDeleteFlashcard() {
-    this.props.deleteFlashcard(this.props.word, () => {
+    this.props.deleteFlashcard(this.props.id, () => {
       this.props.getFlashcards();
     });
   }
