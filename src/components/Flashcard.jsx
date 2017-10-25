@@ -1,10 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { deleteFlashcard, getFlashcards } from '../actions';
 
 class Flashcard extends React.Component {
   constructor(props) {
     super(props);
     this.state = { flipped: false };
     this.toggleFlip = this.toggleFlip.bind(this);
+    this.handleDeleteFlashcard = this.handleDeleteFlashcard.bind(this);
   }
 
   toggleFlip() {
@@ -12,6 +15,13 @@ class Flashcard extends React.Component {
       flipped: !this.state.flipped
     })
   }
+
+  handleDeleteFlashcard() {
+    this.props.deleteFlashcard(this.props.word, () => {
+      this.props.getFlashcards();
+    });
+  }
+
 
   render() {
     if (this.state.flipped) {
@@ -24,7 +34,7 @@ class Flashcard extends React.Component {
           <div className="col-xs-6 button-box">
             <button>Got it!</button>
             <button>Nope.</button>
-            <button>Delete Flashcard</button>
+            <button onClick={this.handleDeleteFlashcard}>Delete Flashcard</button>
           </div>
         </div>
       )
@@ -40,4 +50,4 @@ class Flashcard extends React.Component {
   }
 }
 
-export default Flashcard;
+export default connect(null, { deleteFlashcard, getFlashcards })(Flashcard);

@@ -5,6 +5,7 @@ export const FETCH_WEBSTER = 'FETCH_WEBSTER';
 export const LOAD_FLASHCARD = 'LOAD_FLASHCARD';
 export const CREATE_FLASHCARD = 'CREATE_FLASHCARD';
 export const GET_FLASHCARDS = 'GET_FLASHCARDS';
+export const DELETE_FLASHCARD ='DELETE_FLASHCARD';
 
 export const fetchOxford = (word) => {
   const request = axios.get(`/oxford`, {
@@ -52,9 +53,22 @@ export const createFlashcard = (values, callback) => {
 export const getFlashcards = () => {
   const request = axios.get(`/flashcards/getflashcards`)
     
-
   return {
     type: GET_FLASHCARDS,
     payload: request
   }
+}
+
+export const deleteFlashcard = (id, callback) => {
+  axios.delete('/flashcards/deleteFlashcard', {
+    params: {
+      cardId: id
+    }
+  })
+  .then(() => callback())
+
+  return {
+    type: DELETE_FLASHCARD,
+    payload: id
+  } 
 }

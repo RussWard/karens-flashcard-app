@@ -36,3 +36,21 @@ module.exports.insertFlashcard = (card, cb) => {
     }
   })
 }
+
+module.exports.deleteFlashcard = (id, cb) => {
+  MongoClient.connect(url, (err, db) => {
+    if (err) {
+      console.log('Error connecting to db ', err);
+    } else {
+      db.collection('flashcards').deleteOne({word: id}, (err, result) => {
+        if (err) {
+          console.log('ERROR DELETING DOCUMENT =====> ', err);
+          cb(err, null);
+        } else {
+          console.log('document deleted');
+          cb(null, result);
+        }
+      })
+    }
+  })
+}
