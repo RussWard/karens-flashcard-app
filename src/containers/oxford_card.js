@@ -28,16 +28,17 @@ class OxfordCard extends React.Component {
           <ol>
             {this.props.oxford.defs.map(def => {
               if (def && def.definition.trim() !== '') {
-                return <li 
-                        key={def.id}
-                        onClick={() => {
-                          this.newFlashcard.apply(this, [def])
-                        }}>
-                          <Card 
-                            def={def}
-                            type={this.props.oxford.type} 
-                            />
-                       </li>
+                return (
+                  <li 
+                  key={def.id}
+                  onClick={() => {this.newFlashcard.apply(this, [def])
+                  }}>
+                    <Card 
+                      def={def}
+                      type={this.props.oxford.type} 
+                    />
+                  </li>
+                )
               }
             })}
           </ol>  

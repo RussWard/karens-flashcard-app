@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const cookieParser = require('cookie-parser');
 const routes = require('./routes');
 
 require('dotenv').config();
@@ -11,7 +12,12 @@ const PORT = process.env.PORT || '3000';
 const app = express();
 
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, '../dist')));
+app.use(cookieParser());
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+app.use(express.static(path.join(__dirname, '../public')));
+
+app.use('/', routes.auth);
 app.use('/oxford', routes.oxford);
 app.use('/webster', routes.webster);
 app.use('/flashcards', routes.flashcards);

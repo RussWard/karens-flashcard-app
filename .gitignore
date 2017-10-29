@@ -1,4 +1,4 @@
 /node_modules/
-/dist/bundle.js
-/dist/bundle.js.map
+/public/dist/bundle.js
+/public/dist/bundle.js.map
 .env
