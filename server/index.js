@@ -22,30 +22,6 @@ app.use('/oxford', routes.oxford);
 app.use('/webster', routes.webster);
 app.use('/flashcards', routes.flashcards);
 
-
-
-
-// const dropCollection = (db, callback) => {
-//   let collection = db.collection('documents');
-//   collection.drop((err, delOkay) => {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       console.log('collection dropped');
-//     }
-//   })
-// }
-
-// MongoClient.connect(url, (err, db) => {
-//   assert.equal(null, err);
-//   console.log('Connected successfully to server');
-//   findDocuments(db, () => {
-//     dropCollection(db, () => {
-//       db.close();
-//     })
-//   })
-// });
-
 app.listen(PORT, () => {
   console.log('listening on port ', PORT);
 });
